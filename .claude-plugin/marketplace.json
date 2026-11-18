@@ -1,0 +1,18 @@
+{
+  "name": "saltworks",
+  "owner": { "name": "Stiven Gjekaj" },
+  "metadata": {
+    "description": "Mods for Claude Code: two dithered themes, guards for git and files, and two bands above the prompt. Install each one alone."
+  },
+  "plugins": [
+    { "name": "salt-moon", "source": "./plugins/salt-moon", "description": "A dark theme: a dithered salt flat under a pale moon." },
+    { "name": "salt-moon-dawn", "source": "./plugins/salt-moon-dawn", "description": "A light theme: the same salt flat at dawn, under a low sun." },
+    { "name": "commit-guard", "source": "./plugins/commit-guard", "description": "Blocks a commit or a pull request text that breaks a rule that you turn on." },
+    { "name": "push-guard", "source": "./plugins/push-guard", "description": "Asks you before Claude pushes, opens a pull request, or makes a release." },
+    { "name": "readonly-guard", "source": "./plugins/readonly-guard", "description": "Keeps folders that you name read only." },
+    { "name": "delete-guard", "source": "./plugins/delete-guard", "description": "Blocks a recursive delete of a folder that Claude did not list first." },
+    { "name": "style-linter", "source": "./plugins/style-linter", "description": "Blocks em-dashes and emoji in files, and notes passive voice in prose." },
+    { "name": "commit-size-band", "source": "./plugins/commit-size-band", "description": "Shows the staged size above the prompt, amber when a commit is too big." },
+    { "name": "sessions-band", "source": "./plugins/sessions-band", "description": "Shows linked sessions and active subagents above the prompt." }
+  ]
+}
