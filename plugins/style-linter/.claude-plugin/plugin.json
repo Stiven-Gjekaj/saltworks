@@ -1,0 +1,14 @@
+{
+  "name": "style-linter",
+  "version": "0.1.0",
+  "description": "Blocks an em-dash or an emoji that Claude adds to a file, and notes passive voice in prose files.",
+  "author": { "name": "Stiven Gjekaj" },
+  "license": "MIT",
+  "homepage": "https://github.com/Stiven-Gjekaj/saltworks",
+  "keywords": ["style", "lint", "writing"],
+  "userConfig": {
+    "emDash": { "type": "boolean", "title": "Block em-dashes", "description": "Block a Write or an Edit that adds an em-dash to a file.", "default": true },
+    "emoji": { "type": "boolean", "title": "Block emoji", "description": "Block a Write or an Edit that adds an emoji to a file.", "default": true },
+    "passive": { "type": "boolean", "title": "Note passive voice", "description": "Give Claude a note when new text in a prose file may use the passive voice.", "default": true }
+  }
+}
