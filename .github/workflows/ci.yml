@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Validate and test each mod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # The gate needs Claude Code 2.1.325 or newer for `claude plugin test`.
+      - name: Install Claude Code
+        run: npm install --global @anthropic-ai/claude-code
+
+      - name: Run the gate
+        run: scripts/check.sh
+
+      # No text file in the repository holds an em-dash.
+      - name: Check the text rules
+        run: |
+          if grep -rnP --exclude-dir=.git --include='*.md' --include='*.ts' --include='*.tsx' --include='*.json' --include='*.yml' --include='*.sh' --include='*.mjs' --include='*.html' '\x{2014}' .; then
+            echo "An em-dash is in the files above."
+            exit 1
+          fi
