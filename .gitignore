@@ -1,0 +1,14 @@
+# Operating system files.
+.DS_Store
+Thumbs.db
+
+# Editor and tool directories.
+.idea/
+.vscode/
+.claude/
+
+# The types that Claude Code writes beside a mod when it loads it.
+.claude-plugin/types/
+
+# Logs.
+*.log
