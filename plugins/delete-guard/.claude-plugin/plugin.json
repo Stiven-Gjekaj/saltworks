@@ -1,0 +1,9 @@
+{
+  "name": "delete-guard",
+  "version": "0.1.0",
+  "description": "Blocks a recursive rm on a folder until Claude has listed that folder in the session, so it looks before it deletes.",
+  "author": { "name": "Stiven Gjekaj" },
+  "license": "MIT",
+  "homepage": "https://github.com/Stiven-Gjekaj/saltworks",
+  "keywords": ["files", "delete", "guard"]
+}
