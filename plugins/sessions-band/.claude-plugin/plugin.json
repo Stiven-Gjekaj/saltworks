@@ -1,0 +1,16 @@
+{
+  "name": "sessions-band",
+  "version": "0.1.0",
+  "description": "Shows the sessions linked to this one and the active subagents in a band above the prompt.",
+  "author": {
+    "name": "Stiven Gjekaj"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Stiven-Gjekaj/saltworks",
+  "keywords": [
+    "sessions",
+    "subagents",
+    "band"
+  ],
+  "types": "./types/index.d.ts"
+}
