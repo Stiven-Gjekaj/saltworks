@@ -1,0 +1,17 @@
+{
+  "name": "readonly-guard",
+  "version": "0.1.0",
+  "description": "Keeps folders that you name read only: Claude cannot edit, write, move or delete a file in them.",
+  "author": { "name": "Stiven Gjekaj" },
+  "license": "MIT",
+  "homepage": "https://github.com/Stiven-Gjekaj/saltworks",
+  "keywords": ["files", "read-only", "guard"],
+  "userConfig": {
+    "folders": {
+      "type": "string",
+      "title": "Read-only folders",
+      "description": "A comma-separated list. A plain name, such as Materials, matches that folder at any depth. A path, such as ~/vault, matches that folder and all below it.",
+      "default": "Materials"
+    }
+  }
+}
