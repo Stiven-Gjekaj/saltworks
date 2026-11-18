@@ -46,8 +46,8 @@ The text rules also apply to `gh pr create`, `edit`, `comment` and `review`.
 | `conventional` | Require a Conventional Commit subject. | off |
 | `prText` | Apply the text rules to pull request text. | on |
 
-Set them in `/config`, or under `pluginConfigs.commit-guard.options` in
-`~/.claude/settings.json`.
+Set them in `/config`, or under
+`pluginConfigs["commit-guard@saltworks"].options` in `~/.claude/settings.json`.
 
 ## Limits
 

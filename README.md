@@ -162,24 +162,28 @@ In the desktop app: click **+** next to the prompt box, then **Plugins**, then
 A guard rule that a person can disagree with is a setting, and you can turn it
 off. Open `/config` in Claude Code and find the mod by name.
 
-You can also write the settings in `~/.claude/settings.json`:
+You can also write the settings in `~/.claude/settings.json`. The key is the
+name of the mod, then `@saltworks`:
 
 ```json
 {
   "pluginConfigs": {
-    "commit-guard": {
+    "commit-guard@saltworks": {
       "options": {
         "gitName": "Ada Lovelace",
         "gitEmail": "ada@example.com",
         "conventional": true
       }
     },
-    "readonly-guard": {
+    "readonly-guard@saltworks": {
       "options": { "folders": "Materials, ~/vault" }
     }
   }
 }
 ```
+
+A mod that you load from its folder with `--plugin-dir` reads its plain name,
+such as `commit-guard`, as the key.
 
 | Mod | Setting | Default |
 | --- | --- | --- |
