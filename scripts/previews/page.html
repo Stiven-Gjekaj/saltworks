@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- The page around a theme preview. scripts/previews/render.mjs fills each {{name}}. -->
+<style>
+*{box-sizing:border-box} body{margin:0;width:1600px;height:1000px;overflow:hidden;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;color:{{tp}}}
+.bg{position:fixed;inset:0;width:1600px;height:1000px}
+.col{position:absolute;left:400px;top:0;width:800px;height:1000px;background:{{glass}};backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-left:1px solid {{line}};border-right:1px solid {{line}};padding:44px 48px}
+.user{margin-left:auto;width:fit-content;max-width:520px;background:{{s2}};border:1px solid {{line}};border-radius:14px;padding:10px 16px;color:{{tp}}}
+.ans{margin-top:26px;color:{{tp}}} .ans p{margin:0 0 12px}
+code{font:13.5px/1.6 ui-monospace,Menlo,monospace}
+.inline{background:{{s3}};border:1px solid {{line}};border-radius:5px;padding:1px 5px}
+pre{margin:14px 0;background:{{s1}};border:1px solid {{line}};border-radius:10px;padding:14px 16px;overflow:hidden}
+.k{color:{{accent}}} .s{color:{{success}}} .l{color:{{pro}}} .n{color:{{danger}}} .v{color:{{warning}}} .cm{color:{{tm}}}
+.tool{margin:16px 0;color:{{ts}};font-size:14px} .tool b{color:{{tp}};font-weight:600} .ok{color:{{success}}}
+.band{position:absolute;left:48px;right:48px;bottom:118px;color:{{tm}};font-size:13.5px;line-height:1.7}
+.prompt{position:absolute;left:48px;right:48px;bottom:40px;height:64px;background:{{s2}};border:1px solid {{line}};border-radius:14px;padding:20px 18px;color:{{tm}}}
+.muted{color:{{tm}}}
+</style></head><body><img class="bg" src="{{svg}}"><div class="col">
+<div class="user">Make the build step skip the cache when the lockfile changes.</div>
+<div class="ans"><p>The cache key does not include the lockfile, so a new dependency reuses an old cache. I add its hash to the key.</p>
+<div class="tool"><b>Edit</b> &nbsp;scripts/build.ts <span class="ok">+4 -1</span></div>
+<pre><code><span class="cm">// The key changes when the lockfile changes.</span>
+<span class="k">const</span> <span class="v">lockHash</span> = <span class="n">hashFile</span>(<span class="s">'package-lock.json'</span>)
+<span class="k">const</span> <span class="v">key</span> = <span class="s">`build-${</span><span class="v">node</span><span class="s">}-${</span><span class="v">lockHash</span><span class="s">}`</span>
+<span class="k">if</span> (<span class="v">age</span> &gt; <span class="l">7</span> * <span class="l">86_400</span>) <span class="k">return</span> <span class="l">null</span></code></pre>
+<div class="tool"><b>Bash</b> &nbsp;npm test <span class="ok">48 passed</span></div>
+<p>The tests pass. A change to <code class="inline">package-lock.json</code> now gives a new key, and the old cache stays for the other branches.</p></div>
+<div class="band">Staged: 1 file, +4 -1<br>Subagents: Read the build scripts (running)</div>
+<div class="prompt">Reply...</div>
+</div></body></html>
