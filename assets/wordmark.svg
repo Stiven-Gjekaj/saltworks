@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 756 180" width="756" height="180" role="img" aria-label="Saltworks">
+  <title>Saltworks</title>
+
+  <defs>
+    <!-- Moonlight through to the first light of dawn. The shift runs along the
+         word, from the night theme to the day theme. -->
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0" stop-color="#9fb4ec"/>
+      <stop offset="0.45" stop-color="#b9a6e6"/>
+      <stop offset="0.8" stop-color="#e9a8b8"/>
+      <stop offset="1" stop-color="#f3b48a"/>
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- One dither cell, tiled: the 2x2 pattern of the themes, at half strength. -->
+    <pattern id="dither" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect width="4" height="4" fill="#2b3354" opacity="0.55"/>
+      <rect x="4" y="4" width="4" height="4" fill="#2b3354" opacity="0.55"/>
+    </pattern>
+  </defs>
+
+  <rect width="756" height="180" rx="16" fill="#10121c"/>
+  <rect x="0" y="136" width="756" height="44" fill="url(#dither)" opacity="0.6"/>
+  <rect x="6" y="6" width="744" height="168" rx="11"
+        fill="none" stroke="#7fb0dc" stroke-opacity="0.28" stroke-width="2"/>
+
+  <g filter="url(#glow)">
+    <path d="M24 0h12v12h-12zM36 0h12v12h-12zM48 0h12v12h-12zM12 12h12v12h-12zM24 12h12v12h-12zM36 12h12v12h-12zM0 24h12v12h-12zM12 24h12v12h-12zM24 24h12v12h-12zM0 36h12v12h-12zM12 36h12v12h-12zM24 36h12v12h-12zM0 48h12v12h-12zM12 48h12v12h-12zM24 48h12v12h-12zM12 60h12v12h-12zM24 60h12v12h-12zM36 60h12v12h-12zM24 72h12v12h-12zM36 72h12v12h-12zM48 72h12v12h-12z" fill="#dfe2f0" opacity="0.8"
+          transform="translate(48 48)"/>
+    <path d="M12 0h48v12h-48zM0 12h12v12h-12zM0 24h12v12h-12zM12 36h36v12h-36zM48 48h12v12h-12zM48 60h12v12h-12zM0 72h48v12h-48zM84 0h36v12h-36zM72 12h12v12h-12zM120 12h12v12h-12zM72 24h12v12h-12zM120 24h12v12h-12zM72 36h60v12h-60zM72 48h12v12h-12zM120 48h12v12h-12zM72 60h12v12h-12zM120 60h12v12h-12zM72 72h12v12h-12zM120 72h12v12h-12zM144 0h12v12h-12zM144 12h12v12h-12zM144 24h12v12h-12zM144 36h12v12h-12zM144 48h12v12h-12zM144 60h12v12h-12zM144 72h60v12h-60zM216 0h60v12h-60zM240 12h12v12h-12zM240 24h12v12h-12zM240 36h12v12h-12zM240 48h12v12h-12zM240 60h12v12h-12zM240 72h12v12h-12zM288 0h12v12h-12zM336 0h12v12h-12zM288 12h12v12h-12zM336 12h12v12h-12zM288 24h12v12h-12zM336 24h12v12h-12zM288 36h12v12h-12zM312 36h12v12h-12zM336 36h12v12h-12zM288 48h12v12h-12zM312 48h12v12h-12zM336 48h12v12h-12zM288 60h24v12h-24zM324 60h24v12h-24zM288 72h12v12h-12zM336 72h12v12h-12zM372 0h36v12h-36zM360 12h12v12h-12zM408 12h12v12h-12zM360 24h12v12h-12zM408 24h12v12h-12zM360 36h12v12h-12zM408 36h12v12h-12zM360 48h12v12h-12zM408 48h12v12h-12zM360 60h12v12h-12zM408 60h12v12h-12zM372 72h36v12h-36zM432 0h48v12h-48zM432 12h12v12h-12zM480 12h12v12h-12zM432 24h12v12h-12zM480 24h12v12h-12zM432 36h48v12h-48zM432 48h12v12h-12zM456 48h12v12h-12zM432 60h12v12h-12zM468 60h12v12h-12zM432 72h12v12h-12zM480 72h12v12h-12zM504 0h12v12h-12zM552 0h12v12h-12zM504 12h12v12h-12zM540 12h12v12h-12zM504 24h12v12h-12zM528 24h12v12h-12zM504 36h24v12h-24zM504 48h12v12h-12zM528 48h12v12h-12zM504 60h12v12h-12zM540 60h12v12h-12zM504 72h12v12h-12zM552 72h12v12h-12zM588 0h48v12h-48zM576 12h12v12h-12zM576 24h12v12h-12zM588 36h36v12h-36zM624 48h12v12h-12zM624 60h12v12h-12zM576 72h48v12h-48z" fill="url(#ink)"
+          transform="translate(128 52) scale(0.9119)"/>
+  </g>
+</svg>
