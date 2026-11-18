@@ -1,0 +1,15 @@
+{
+  "name": "salt-moon-dawn",
+  "version": "0.1.0",
+  "description": "A light theme: the same dithered salt flat at dawn, with lilac mesas under a low sun.",
+  "author": {
+    "name": "Stiven Gjekaj"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Stiven-Gjekaj/saltworks",
+  "keywords": [
+    "theme",
+    "light",
+    "dither"
+  ]
+}
