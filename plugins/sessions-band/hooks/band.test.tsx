@@ -1,6 +1,6 @@
 import { expect, test } from 'claude-code/testing'
 
-import { agentsLine, parseSessions, sessionsLine } from './rows'
+import { agentsLine, countOf, isCollapsedFor, parseSessions, prIcon, stateIcon } from './rows'
 
 const BAND = {
   plugin: 'sessions-band',
@@ -19,31 +19,96 @@ const AGENTS = [
   { id: 'a2', description: 'Read the tests', type: 'Explore', status: 'completed' as const },
 ]
 
-test('the lines name linked sessions and active subagents', () => {
+const RUNNING = '●'
+const IDLE = '○'
+const MERGED = '✓'
+
+test('rows carry the state and the pull request, and each has an icon', () => {
   const rows = parseSessions(LINKED)
 
-  expect(sessionsLine(rows)).toBe('Sessions: Parser work (running), Docs (idle, PR merged)')
-  expect(sessionsLine([])).toBe(undefined)
-  expect(agentsLine(AGENTS)).toBe('Subagents: Search the docs (running), 1 done')
-  expect(agentsLine([AGENTS[1]!])).toBe(undefined)
+  expect(rows).toEqual([
+    { id: 'local_a', title: 'Parser work', isRunning: true },
+    { id: 'local_b', title: 'Docs', isRunning: false, pr: 'merged' },
+  ])
+  expect(stateIcon(rows[0]!)).toEqual({ mark: RUNNING, color: 'success' })
+  expect(stateIcon(rows[1]!).mark).toBe(IDLE)
+  expect(prIcon(rows[0]!)).toBe(undefined)
+  expect(prIcon(rows[1]!)).toEqual({ mark: MERGED, color: 'merged' })
+  expect(prIcon({ id: 'x', title: 'x', isRunning: false, pr: 'closed' })?.color).toBe('error')
   expect(parseSessions('not json')).toEqual([])
 })
 
-test('the band shows both lines, on every surface', async ($, on) => {
+test('no icon is an emoji', () => {
+  const states = [true, false].map(isRunning => stateIcon({ id: 'x', title: 'x', isRunning }))
+  const prs = (['open', 'draft', 'merged', 'closed'] as const).map(pr => prIcon({ id: 'x', title: 'x', isRunning: false, pr }))
+  const marks = [...states, ...prs].map(icon => icon?.mark ?? '')
+
+  expect(marks.every(mark => mark.length === 1 && !/\p{Extended_Pictographic}/u.test(mark))).toBe(true)
+})
+
+test('the subagents line names the active ones and counts the rest', () => {
+  expect(agentsLine(AGENTS)).toBe('Subagents: Search the docs (running), 1 done')
+  expect(agentsLine([AGENTS[1]!])).toBe(undefined)
+})
+
+test('the band lists each session on its own row, on every surface', async ($, on) => {
   on('mcp.call', (_, e) => ({ value: { isError: false, content: [{ type: 'text', text: e.args?.linked === true ? LINKED : '[]' }] } }))
   on('agent.list', () => ({ value: AGENTS }))
   on('clock.every', () => ({ value: undefined }))
-  on('ui.close', () => ({ value: undefined }))
   on('session.start', (_, e) => ({ cwd: e.cwd }))
 
   await $.session.start({ cwd: '/', surface: 'desktop', isInteractive: true })
 
   for (const surface of ['terminal', 'desktop', 'vscode', 'mobile'] as const) {
     const ui = await $.ui.mount({ ...BAND, surface })
-    expect((await ui.find({ type: 'Text', text: /^Sessions/ }))?.text).toMatch(/Parser work \(running\)/)
-    expect((await ui.find({ type: 'Text', text: /^Subagents/ }))?.text).toMatch(/Search the docs/)
+    const texts = (await ui.findAll({ type: 'Text' })).map(found => found.text)
+
+    expect(texts).toEqual([
+      'Sessions (2)',
+      ' ',
+      `  ${RUNNING} `,
+      'Parser work',
+      `  ${IDLE} `,
+      'Docs',
+      ` ${MERGED}`,
+      'Subagents: Search the docs (running), 1 done',
+    ])
     await ui.unmount()
   }
+})
+
+test('a long list starts collapsed, and the person can open and close it', () => {
+  expect(isCollapsedFor(null, 3)).toBe(false)
+  expect(isCollapsedFor(null, 7)).toBe(true)
+  expect(isCollapsedFor(false, 50)).toBe(false)
+  expect(isCollapsedFor(true, 1)).toBe(true)
+  expect(countOf(parseSessions(LINKED))).toEqual({ running: 1, idle: 1 })
+})
+
+test('the band collapses a long list to counts, and the toggle opens it', async ($, on) => {
+  const many = JSON.stringify(Array.from({ length: 14 }, (_, i) => ({ sessionId: `local_${i}`, title: `Task ${i}`, isRunning: i < 4 })))
+  on('mcp.call', () => ({ value: { isError: false, content: [{ type: 'text', text: many }] } }))
+  on('agent.list', () => ({ value: [] }))
+  on('clock.every', () => ({ value: undefined }))
+  on('session.start', (_, e) => ({ cwd: e.cwd }))
+
+  await $.session.start({ cwd: '/', surface: 'desktop', isInteractive: true })
+  const ui = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  const closed = (await ui.findAll({ type: 'Text' })).map(found => found.text)
+
+  expect(closed).toEqual(['Sessions (14)', `  ${RUNNING} 4`, `  ${IDLE} 10`, ' '])
+
+  await ui.press({ key: 'sessions-toggle' })
+  const open = (await ui.findAll({ type: 'Text' })).map(found => found.text)
+
+  expect(open).toContain('Task 0')
+  expect(open).toContain('Task 9')
+  expect(open).not.toContain('Task 10')
+  expect(open).toContain('  and 4 more')
+
+  await ui.press({ key: 'sessions-toggle' })
+  expect((await ui.findAll({ type: 'Text' })).map(found => found.text)).toEqual(closed)
+  await ui.unmount()
 })
 
 test('with nothing linked and no active subagent the band leaves the row to the engine', async ($, on) => {
@@ -52,7 +117,6 @@ test('with nothing linked and no active subagent the band leaves the row to the 
   })
   on('agent.list', () => ({ value: [] }))
   on('clock.every', () => ({ value: undefined }))
-  on('ui.close', () => ({ value: undefined }))
   on('session.start', (_, e) => ({ cwd: e.cwd }))
   on('ui.render', ($, e) => {
     const { Text } = $.ui.resolve(e)
@@ -71,7 +135,6 @@ test('with nothing to show the band list drops this row and keeps the others', a
   on('mcp.call', () => ({ value: { isError: false, content: [{ type: 'text', text: 'No other sessions found.' }] } }))
   on('agent.list', () => ({ value: [] }))
   on('clock.every', () => ({ value: undefined }))
-  on('ui.close', () => ({ value: undefined }))
   on('session.start', (_, e) => ({ cwd: e.cwd }))
 
   await $.session.start({ cwd: '/', surface: 'desktop', isInteractive: true })
