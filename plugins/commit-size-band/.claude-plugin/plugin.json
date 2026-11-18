@@ -1,0 +1,30 @@
+{
+  "name": "commit-size-band",
+  "version": "0.1.0",
+  "description": "Shows the staged files above the prompt and turns amber when one commit grows too big.",
+  "author": {
+    "name": "Stiven Gjekaj"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Stiven-Gjekaj/saltworks",
+  "keywords": [
+    "git",
+    "commit",
+    "band"
+  ],
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "maxFiles": {
+      "type": "number",
+      "title": "Most files in one commit",
+      "description": "The band turns amber when more files than this are staged.",
+      "default": 5
+    },
+    "maxLines": {
+      "type": "number",
+      "title": "Most changed lines in one commit",
+      "description": "The band turns amber when more lines than this change in the staged files.",
+      "default": 300
+    }
+  }
+}
