@@ -1,0 +1,15 @@
+{
+  "name": "salt-moon",
+  "version": "0.1.0",
+  "description": "A dark theme: a dithered salt flat with mesas under a pale moon, in indigo tones.",
+  "author": {
+    "name": "Stiven Gjekaj"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Stiven-Gjekaj/saltworks",
+  "keywords": [
+    "theme",
+    "dark",
+    "dither"
+  ]
+}
