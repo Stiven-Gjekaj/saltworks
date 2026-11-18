@@ -18,10 +18,13 @@ Answer `y` to add the marketplace, then pick the user scope.
 
 ## What it does
 
-Up to two rows above the prompt:
+A list above the prompt, with one row for each session:
 
 ```
-Sessions: Parser work (running), Docs (idle, PR merged)
+Sessions (3)  Hide
+  ● Parser work
+  ○ Docs ✓
+  ○ Release notes ↑
 Subagents: Search the docs (running), 1 done
 ```
 
@@ -31,6 +34,32 @@ Subagents: Search the docs (running), 1 done
   done.
 
 The band is hidden when it has nothing to show.
+
+### The icons
+
+| Icon | Meaning |
+| --- | --- |
+| ● | The session runs. |
+| ○ | The session waits. |
+| ↑ | Its pull request is open. |
+| ◌ | Its pull request is a draft. |
+| ✓ | Its pull request is merged. |
+| ✗ | Its pull request is closed. |
+
+The icons are plain symbols, not emoji.
+
+### A long list
+
+**Hide** collapses the list to one row of counts, and **Show** opens it again:
+
+```
+Sessions (14)  ● 4  ○ 10  Show
+```
+
+A list of more than 6 sessions starts collapsed. After you press the button,
+the band keeps your choice for the rest of the session.
+An open list shows 10 sessions, then a count of the rest.
+When the band has focus (ctrl+x tab), the key `s` presses the button.
 
 ## Limits
 

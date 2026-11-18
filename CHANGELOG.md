@@ -25,4 +25,5 @@ Each mod carries the version of the release that last changed it.
 - `style-linter`: blocks an em-dash or an emoji that Claude adds to a file, and
   notes passive voice in prose files.
 - `commit-size-band`: shows the staged size above the prompt.
-- `sessions-band`: shows the linked sessions and the subagents that run.
+- `sessions-band`: lists the linked sessions with a status icon each, and the
+  subagents that run. A long list collapses to counts.

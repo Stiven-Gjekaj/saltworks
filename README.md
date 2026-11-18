@@ -128,7 +128,7 @@ If both are on, the theme that starts last wins.
 | [`delete-guard`](plugins/delete-guard) | Guard | Blocks `rm -r` on a folder until Claude lists that folder in the session. |
 | [`style-linter`](plugins/style-linter) | Linter | Blocks an em-dash or an emoji that Claude adds to a file, and notes passive voice in prose. |
 | [`commit-size-band`](plugins/commit-size-band) | Band | Shows the staged files and lines, and turns amber when one commit grows too big. |
-| [`sessions-band`](plugins/sessions-band) | Band | Shows the sessions linked to this one and the subagents that run. |
+| [`sessions-band`](plugins/sessions-band) | Band | Lists the sessions linked to this one with a status icon each, and the subagents that run. A long list collapses. |
 
 Each mod has a README in its folder with its settings and its limits.
 
