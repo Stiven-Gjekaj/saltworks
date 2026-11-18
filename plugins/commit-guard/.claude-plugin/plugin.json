@@ -1,0 +1,19 @@
+{
+  "name": "commit-guard",
+  "version": "0.1.0",
+  "description": "Blocks a git commit or a pull request text that breaks a rule: an attribution line, an em-dash, an emoji, a version in the subject, or the wrong git identity.",
+  "author": { "name": "Stiven Gjekaj" },
+  "license": "MIT",
+  "homepage": "https://github.com/Stiven-Gjekaj/saltworks",
+  "keywords": ["git", "commit", "guard"],
+  "userConfig": {
+    "gitName": { "type": "string", "title": "Git name", "description": "The name that each commit must carry. Leave it empty to skip the check.", "default": "" },
+    "gitEmail": { "type": "string", "title": "Git email", "description": "The email that each commit must carry. Leave it empty to skip the check.", "default": "" },
+    "attribution": { "type": "boolean", "title": "Block attribution lines", "description": "Block a Co-Authored-By line or a footer that says a tool made the text.", "default": true },
+    "emDash": { "type": "boolean", "title": "Block em-dashes", "description": "Block an em-dash in a commit message or a pull request text.", "default": true },
+    "emoji": { "type": "boolean", "title": "Block emoji", "description": "Block an emoji in a commit message or a pull request text.", "default": true },
+    "versionInSubject": { "type": "boolean", "title": "Block a version in the subject", "description": "Block a version number, such as v1.2.0, in the subject line.", "default": true },
+    "conventional": { "type": "boolean", "title": "Require Conventional Commits", "description": "Require a subject that starts with a type, such as feat: or fix(parser):.", "default": false },
+    "prText": { "type": "boolean", "title": "Check pull request text", "description": "Apply the text rules to gh pr create, edit, comment and review.", "default": true }
+  }
+}
